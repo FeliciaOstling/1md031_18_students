@@ -1,9 +1,174 @@
+
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>DELI-VERY</title>
-    </head>
-    <body>
-        <h1>Hello World!!!</h1>
-    </body>
+<head>
+  <title>SpaceBurger</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="/socket.io/socket.io.js" defer></script>
+  <script src="https://vuejs.org/js/vue.js"></script>
+  <script type="text/javascript" src="js/menu.js" defer></script>
+  <script src="js/js_script.js" defer></script>
+  <script src="js/vue_script.js" defer></script>
+
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+
+
+</head>
+
+<body>
+  <header class="header">
+    <img id="image" src= "https://www.star2star.com/sites/default/files/headers/Space-Museum_0.png">
+    <h1 id="headline"> Welcome to SpaceBurger</h1>
+  </header>
+
+  <main id="burgerVue">
+
+    <section class="burger">
+
+
+      <!--
+      <div class="wrapper" id="wrapper">
+
+
+
+      <div class="box SpaceBurger">
+      <h2>Select a SpaceBurger</h2>
+      <p> This is where you select your SpaceBurger</p>
+    </div>
+
+  </div>
+-->
+
+
+
+<div class="wrapper" id="wrapper">    <!-- This creates the black box, contains a for-loop and a if-statement. The for-loop checks the burgers in Json and the if statement checks if the stock is bigger than 0.   -->
+                                      <!-- Check kCal and if the burgers contains lactose/gluten. -->
+  <div class="box SpaceBurger">
+    <h2> Select a SpaceBurger</h2>
+  </div>
+
+  <div class="box burger.id" v-for="burger in burgers" v-if="burger.stock > 0" :id="burger.burger" >
+
+    <h1>
+      {{burger.name}}
+    </h1>
+
+    <img :src= "burger.image" :width= 200>
+
+    <ul>
+
+      <li>
+        Contains {{burger.kcal}} kCal
+      </li>
+
+      <li v-if="burger.lactose">
+        This burger contains lactose
+      </li>
+
+      <li v-if="burger.gluten">
+        This burger contains gluten
+      </li>
+      <p> <input type="checkbox" v-bind:value="burger.name" v-model="burgerOrd"> Add to basket </p> <!-- Creates the array with the burgers that was added by the checkbox. -->
+
+
+    </ul>
+
+
+  </div>
+
+
+</div>
+
+
+
+<section class= "contact" id="contact">
+  <h2>Your information</h2>
+  <p> Add required information about you </p>
+
+  <h1>Delivery information</h1>
+
+  <form>
+    <p>
+      <label for="Full name">Full name</label><br>
+      <input type="text" id="name" name="fn" required="required" placeholder="First- and Lastname" maxlength="30" v-model="name">
+    </p>
+
+
+    <p>
+      <label for="Email"> Email</label><br>
+      <input type="text" id="email" name="ln" placeholder="Email address" maxlength="30" v-model="email">
+    </p>
+
+
+
+    <p>
+      <label for="Payment methods">Payment</lbel><br>
+        <select id="recipient" name="rcp" v-model="recipient">
+          <option value="Klarna">Klarna</option>
+          <option value="Swish"> Swish</option>
+          <option value="Debit card">Debit card</option>
+          <option value="Credit card">Credit card</option>
+        </select>
+      </p>
+
+      <p>
+
+        <label for="Gender">Gender</label><br>
+
+        <input type="radio" id="female" name="gender" value = "Female" v-model="female">
+        <label for= "Female"> Female </label ><br>
+
+          <input type="radio" id="male" name="gender" value = "Male" v-model="male">
+          <label for= "Male"> Male </label><br>
+
+          <input type="radio" id="undisclosed" name="gender" value="Undisclosed" v-model="undisclosed">
+          <label for= "Undisclosed" > Undisclosed </label><br>
+
+
+        </p>
+
+        <h> Choose delivery address! </h>
+        <div class="view-box">
+          <div id="dots" v-on:click="displayOrder">
+            <div v-for="(order, key) in orders" v-bind:style="{ left: order.details.x + 'px', top: order.details.y + 'px'}">
+              D
+            </div>
+          </div>
+        </div>
+
+
+
+      </form>
+
+      <p>
+        <button id="button1" type="button" v-on:click="markDone(name, email, recipient, female, male, undisclosed); addOrder();">Send order<img src= https://previews.123rf.com/images/cvetinaivanova/cvetinaivanova1911/cvetinaivanova191100055/143171238-tick-symbol-in-green-square-checkmark-in-checkbox-vector-icon-yes-right-or-ok-tick-check-mark-with-s.jpg width="15"/></button>
+
+
+      </p>
+
+
+
+      <div id="order">
+
+      </div>
+
+
+
+    </section>
+    <!--
+    <button id="SendButton"><img src= https://previews.123rf.com/images/cvetinaivanova/cvetinaivanova1911/cvetinaivanova191100055/143171238-tick-symbol-in-green-square-checkmark-in-checkbox-vector-icon-yes-right-or-ok-tick-check-mark-with-s.jpg width="25" > Send Order</button>
+  -->
+
+
+
+</main>
+
+</body>
+<footer>
+  <hr>
+  <p>Copyright SpaceBurger Author: Felicia Ostling </p>
+</footer>
+
+
 </html>

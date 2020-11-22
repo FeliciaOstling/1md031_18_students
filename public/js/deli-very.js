@@ -30,7 +30,7 @@ var vm = new Vue({
                     y: event.currentTarget.getBoundingClientRect().top};
       socket.emit("addOrder", { orderId: this.getNext(),
                                 details: { x: event.clientX - 10 - offset.x,
-                                           y: event.clientY - 10 - offset.y },
+                                           y: event.clientY - 10 - offset.y},
                                 orderItems: ["Beans", "Curry"]
                               });
     }

@@ -14,6 +14,8 @@
     <div id="orderList">
       <div v-for="(order, key) in orders">
         #{{ key }}: {{ order.orderItems.join(", ") }}
+        <br>
+        <i> {{order.personalinfo.join(",")}} </i>       <!-- Added join.(",") to get rid of the brackets in the dispatcher -->
       </div>
     </div>
     <div id="dots">
